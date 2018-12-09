@@ -2,42 +2,42 @@
 $(document).ready(function () {
     var starter = ["MonsterHunter", "SmashBros.", "MTG"];
     var btn = $("#starters");
-    
+
     //Grabs the value from limit dropdown menu and stores it in var
-     var limit = 5
+    var limit = 5
     $("#limitMenu").click(function () {
         limit = $(this).val();
     });
     function showGifs(topic) {
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=rZ5nKA692Fno9BTCKyRpJWVqcCPBAugt&limit="+limit;
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=rZ5nKA692Fno9BTCKyRpJWVqcCPBAugt&limit=" + limit;
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
             console.log(response);
             var results = response.data;
-        //   shows only the gif topic you picked
+            //   shows only the gif topic you picked
             $("#body").empty();
-        //    loops through the images in the api
+            //    loops through the images in the api
             for (var i = 0; i < results.length; i++) {
                 var gifDiv = $("<div class='item'>");
-                
+
                 var title = $("<h6>").text(results[i].title);
                 title.addClass("gif-title");
 
                 var R = $("<p>").text("Rating: " + results[i].rating);
                 R.addClass("gif-rating");
-                
-                var img = results[i];
-                
+
+
+
                 var gifs = $("<img class='gif'>");
-                
+
                 var stillImage = results[i].images.fixed_height_still.url;
 
                 var animateImage = results[i].images.fixed_height.url;
 
-                gifs.attr("src", img.images.fixed_height.url);
-               
+
+
                 gifs.attr({
                     src: stillImage,
                     still: stillImage,
@@ -45,8 +45,8 @@ $(document).ready(function () {
                     state: "still",
                     class: "gif"
                 });
-               
-                gifDiv.append(gifs,title,R);
+
+                gifDiv.append(gifs, title, R);
 
                 $("#body").append(gifDiv);
             }
@@ -90,11 +90,11 @@ $(document).ready(function () {
         console.log(topic);
         console.log(starter);
     });
-// click function to make the gif still or animate
+    // click function to make the gif still or animate
     $(document).on("click", '.gif', function () {
 
         var state = $(this).attr("state");
-    
+
         if (state === "still") {
             $(this).attr("src", $(this).attr("animate"));
             $(this).attr("state", "animate");

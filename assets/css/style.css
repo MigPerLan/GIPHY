@@ -6,41 +6,40 @@
     float: left;
     padding: 2px;
     
-  }
- .gif-title{
+}
+.gif-title{
    
    color: white;
    padding: 2px;
  }
-  .gif-rating{
+.gif-rating{
     
     color: white;
     padding: 2px;
   }
- body {
+body {
     background-color: #212129;
     
   }
- #body{
+#body{
  
     background-color: lightslategrey;
     
   }
 
- .pick {
+.pick {
    background-color: rgba(27, 38, 47, 0.226);
    color: white;
    border-radius: 7px!important;
    width: 150px;
    height: 50px;
-       
- }
- .btn{
+  }
+
+.btn{
   background-color: rgba(27, 38, 47, 0.226);
   color: white;
   border-radius: 7px!important;
   width: 150px;
- 
  }
 
  @media screen and (max-width: 500px) {
