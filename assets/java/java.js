@@ -21,12 +21,32 @@ $(document).ready(function () {
         //    loops through the images in the api
             for (var i = 0; i < results.length; i++) {
                 var gifDiv = $("<div class='item'>");
-                var img = results[i];
-                var gifs = $("<img class='gif'>");
-                gifs.attr("src", img.images.fixed_height.url);
+                
+                var title = $("<h6>").text(results[i].title);
+                title.addClass("gif-title");
 
+                var R = $("<p>").text("Rating: " + results[i].rating);
+                R.addClass("gif-rating");
+                
+                var img = results[i];
+                
+                var gifs = $("<img class='gif'>");
+                
+                var stillImage = results[i].images.fixed_height_still.url;
+
+                var animateImage = results[i].images.fixed_height.url;
+
+                gifs.attr("src", img.images.fixed_height.url);
                
-                gifDiv.prepend(gifs);
+                gifs.attr({
+                    src: stillImage,
+                    still: stillImage,
+                    animate: animateImage,
+                    state: "still",
+                    class: "gif"
+                });
+               
+                gifDiv.append(gifs,title,R);
 
                 $("#body").append(gifDiv);
             }
@@ -70,7 +90,20 @@ $(document).ready(function () {
         console.log(topic);
         console.log(starter);
     });
+// click function to make the gif still or animate
+    $(document).on("click", '.gif', function () {
 
+        var state = $(this).attr("state");
+    
+        if (state === "still") {
+            $(this).attr("src", $(this).attr("animate"));
+            $(this).attr("state", "animate");
+        }
+        else {
+            $(this).attr("src", $(this).attr("still"));
+            $(this).attr("state", "still");
+        }
+    });
 
     $(document).on("click", ".topic", showGifs);
 
